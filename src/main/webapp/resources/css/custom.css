@@ -1,0 +1,57 @@
+body{
+	width:960px;
+	margin:auto;
+	color:gray;
+}
+
+table tr td,table tr th{
+	vertical-align:top;
+	
+}
+input:textarea{
+	width:300px;
+	height:200px;
+}
+
+input:select{
+	width:200px;
+}
+
+input:text,input:password{
+	width:200px;
+}
+
+/*Put reuseable css styles after this line*/
+.button {
+	padding: 4px;
+	background-color: green;
+	border-radius: 3px;
+	border: none;
+	cursor:pointer;
+	color: white;
+	font-weight:bold;
+}
+.content-box{
+	margin:20px;
+}
+
+
+.content-header{
+	font-weight:bold;
+	border:2px solid gray;
+	padding:5px;
+}
+.content-content{
+	border:1px solid gray;
+	border-top:none;
+	padding:10px;
+}
+
+/*Styles related to issues*/
+.issue-board-item{
+	border:2px solid gray;
+	border-radius:5px; 
+	color:green;
+	padding:10px;
+	display: inline;
+}

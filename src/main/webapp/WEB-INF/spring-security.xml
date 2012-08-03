@@ -1,0 +1,35 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+                    http://www.springframework.org/schema/beans 
+                    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                    http://www.springframework.org/schema/security 
+                    http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+	<http pattern="/resources/**" security="none" />
+
+	<http use-expressions="true">
+		<intercept-url pattern="/action/users/**" access="hasRole('ADMIN') or hasRole('SUPERADMIN')"/> 
+		<intercept-url pattern="/action/**" access="hasRole('ADMIN') or hasRole('USER') or hasRole('SUPERADMIN')"/> 
+		<intercept-url pattern="/**" access="permitAll()" />
+		<form-login login-processing-url="/login" login-page="/login.jsp"
+			authentication-failure-url="/login.jsp?login_error=1"
+			default-target-url="/action/issues/index" />
+		<logout invalidate-session="false" logout-success-url="/"
+			delete-cookies="JSESSIONID" logout-url="/logout" />
+ 		
+
+		<session-management invalid-session-url="/?session_timeout=yes">
+			<!-- <concurrency-control max-sessions="5" error-if-maximum-exceeded="true"/> -->
+		</session-management>
+	</http>
+
+	<authentication-manager>
+		<!-- <authentication-provider>
+			<user-service>
+				<user name="prakass" password="prakass" authorities="ROLE_ADMIN" />
+			</user-service>
+		</authentication-provider> -->
+		 <authentication-provider user-service-ref="myUserDetailService"/> 
+	</authentication-manager>
+</beans:beans>  
