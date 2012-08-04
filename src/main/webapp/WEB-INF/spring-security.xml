@@ -11,9 +11,9 @@
 	<http use-expressions="true">
 		<intercept-url pattern="/action/users/**" access="hasRole('ADMIN') or hasRole('SUPERADMIN')"/> 
 		<intercept-url pattern="/action/**" access="hasRole('ADMIN') or hasRole('USER') or hasRole('SUPERADMIN')"/> 
-		<intercept-url pattern="/**" access="permitAll()" />
-		<form-login login-processing-url="/login" login-page="/login.jsp"
-			authentication-failure-url="/login.jsp?login_error=1"
+		<intercept-url pattern="/**" access="permitAll()"/>
+		<form-login login-processing-url="/login" login-page="/login.jsp?login=true"
+			authentication-failure-url="/login.jsp?login=error"
 			default-target-url="/action/issues/index" />
 		<logout invalidate-session="false" logout-success-url="/"
 			delete-cookies="JSESSIONID" logout-url="/logout" />
@@ -25,11 +25,14 @@
 	</http>
 
 	<authentication-manager>
-		<!-- <authentication-provider>
-			<user-service>
-				<user name="prakass" password="prakass" authorities="ROLE_ADMIN" />
-			</user-service>
-		</authentication-provider> -->
-		 <authentication-provider user-service-ref="myUserDetailService"/> 
+		 <authentication-provider user-service-ref="myUserDetailService">
+		 	<password-encoder ref="passwordEncoder">
+                <salt-source user-property="username"/>
+            </password-encoder> 
+		 </authentication-provider> 
 	</authentication-manager>
+	 <beans:bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder">
+        <beans:constructor-arg value="512"/>
+        <beans:property name="iterations" value="987"/>
+    </beans:bean>
 </beans:beans>  

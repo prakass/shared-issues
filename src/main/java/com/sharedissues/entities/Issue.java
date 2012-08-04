@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 import com.sharedissues.all.common.Common;
 @Entity
+@Table(name="issue")
 public class Issue {
 	@Id
 	@Column(name="issue_uuid")

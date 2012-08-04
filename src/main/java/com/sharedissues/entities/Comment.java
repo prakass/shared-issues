@@ -5,6 +5,7 @@ import javax.persistence.*;
 import com.sharedissues.all.common.Common;
 import java.util.*;
 @Entity
+@Table(name="comment")
 public class Comment {
 	@Id
 	String commentUuid;

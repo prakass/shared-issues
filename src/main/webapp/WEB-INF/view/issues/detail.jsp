@@ -18,7 +18,13 @@
 	</div>
 	<a href="/action/issues/edit?issueUuid=${issue.issueUuid}">Edit this issue</a>
 	<br/>
-
+	<p class="header-font1">hello im header font1</p>
+	<p class="header-font3">hello im header font</p>
+	<p class="header-font2">hello im header font2</p>
+	<p class="header-font4">hello im header font3</p>
+	<p class="header-font">hello im header font</p>
+	<span class="header-font2">hello im span with header 2</span>
+	<h2 class="header-font4"></h2>
 	${issue.issueDescription}<br/>
 	${issue.assignedPersonEmail}
 	${issue.creatorPersonEmail}

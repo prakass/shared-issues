@@ -71,7 +71,6 @@ public class Queryable
 	
 	public List<Object> getObjects(Object o,String table){
 		List<Object> objects = new ArrayList<Object>();
-		long a = System.currentTimeMillis();
 		Session s =sessionFactory.openSession();
 		
 		s.beginTransaction();
@@ -84,14 +83,11 @@ public class Queryable
 				s.close();
 			}
 		
-		long b= System.currentTimeMillis();
-		System.out.println(b-a/1000+"Second");
 		return objects;
 	}
 	
 	public List<Object> getObjectsForQuery(String sql,Object o){
 		List<Object> objects = new ArrayList<Object>();
-		long a = System.currentTimeMillis();
 		Session s =sessionFactory.openSession();
 		
 		s.beginTransaction();
@@ -104,8 +100,6 @@ public class Queryable
 				s.close();
 			}
 		
-		long b= System.currentTimeMillis();
-		System.out.println(b-a/1000+"Second");
 		return objects;
 	}
 	

@@ -5,6 +5,7 @@ import java.util.*;
 
 
 @Entity
+@Table(name="activity")
 public class Activity {
 	@Id
 	String activityId;
@@ -17,6 +18,8 @@ public class Activity {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	Date date = new Date();
+	
+	
 	
 	
 	

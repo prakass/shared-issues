@@ -20,4 +20,5 @@ public class WebUtility {
 		request.getSession().setAttribute("current.person",person);
 	}
 	
+	
 }

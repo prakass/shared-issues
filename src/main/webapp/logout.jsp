@@ -1,3 +1,3 @@
-<a href="/login.jsp">
-	<h2>Login</h2>
-</a>
+<%@include file="WEB-INF/view/common/header.jsp"%>
+
+<%@include file="WEB-INF/view/common/footer.jsp" %>

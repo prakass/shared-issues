@@ -1,5 +1,5 @@
 #!/bin/bash
-APP_FOLDER=/opt/trunk/myfamily
+APP_FOLDER=/opt/trunk/
 PROPERTIES_FOLDER=/opt/properties
 CLASSPATH=$PROPERTIES_FOLDER:$APP_FOLDER/target/shared-issues-1/WEB-INF/lib/*:$APP_FOLDER/target/shared-isssues-1/WEB-INF/classes/:.
 
@@ -14,4 +14,4 @@ mvn package
 
 echo "Starting application..."
 export CLASSPATH=$CLASSPATH
-java -Dfile.encoding=UTF-8 com.sharedissues.all.common.JettyServer prod
+java -Dfile.encoding=UTF-8 com.sharedissues.all.common.JettyServer prod 80 > app-sysout.log

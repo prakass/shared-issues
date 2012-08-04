@@ -8,8 +8,8 @@ import javax.persistence.*;
 
 import com.sharedissues.all.common.Common;
 
-
 @Entity
+@Table(name="person")
 public class Person implements Serializable{
 	
 	@Id

@@ -9,11 +9,11 @@
     	<property name="max_fetch_depth">3</property>
 		<property name=""></property>
     	<!-- Print SQL to stdout. -->
-    	<property name="show_sql">true</property>
+    	<property name="show_sql">false</property>
     	<property name="format_sql">true</property>
 	
     	<!-- Drop and then re-create schema on SessionFactory build, for testing. -->
-    	<property name="hbm2ddl.auto">update</property>
+    	<property name="hbm2ddl.auto">create</property>
 	
     	<!-- Bind the getCurrentSession() method to the thread. -->
     	<property name="current_session_context_class">thread</property>
@@ -23,5 +23,6 @@
 		<mapping class="com.sharedissues.entities.Issue"/>
 		<mapping class="com.sharedissues.entities.Comment"/>
 		<mapping class="com.sharedissues.entities.Activity"/>
+		<mapping class="com.sharedissues.entities.Visit"/>
 	</session-factory>
 </hibernate-configuration>

@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.sharedissues.entities.Person;
+import com.sharedissues.entities.Visit;
 import com.sharedissues.service.CommonService;
 
 public class MyIntercepter extends HandlerInterceptorAdapter  {
@@ -25,10 +26,7 @@ public class MyIntercepter extends HandlerInterceptorAdapter  {
 			request.getSession().setAttribute("current.person",commonService.getObject(person, username) );
 		 }
 		}
-		
 		activityObserver.observeActivity(request,response);
-		
-		
 		return true;
 	}
 

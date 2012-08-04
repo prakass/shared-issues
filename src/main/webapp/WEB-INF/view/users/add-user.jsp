@@ -1,8 +1,15 @@
+<%@include file="/helper/tags.jsp" %>
 <%@include file="../common/header.jsp"%>
-<form:form method="post" action="add-user" commandName="person">
-	<h2>You add your user</h2>
+<div class="content-box">
+<div class="content-header">
+	<span>You add your user</span>
+</div>
+<div class="content-content">
+	<form:form method="post" action="add-user" commandName="person">
 	<si:showServerError/>
 	<si:showSuccessMessage/>
 	<%@include file="user-form.jsp"%>
 </form:form>
+</div>
+</div>
 <%@include file="../common/footer.jsp"%>

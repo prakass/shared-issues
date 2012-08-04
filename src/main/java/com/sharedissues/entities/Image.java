@@ -13,6 +13,7 @@ import org.hibernate.annotations.FetchMode;
 import com.sharedissues.all.common.Common;
 
 @Entity
+@Table(name="image")
 public class Image {
 	@Id
 	@Column(name="image_uuid")

@@ -2,11 +2,11 @@
 <table>
 	<tr>
 		<td>Title<br/>
-		<form:input path="issueTitle"/> </td>
+		<form:input path="issueTitle" class="required"/> </td>
 	</tr>
 	<tr>
-		<td>Short description<br/>
-		<form:textarea path="issueDescription"/> </td>
+		<td>Description<br/>
+		<form:textarea path="issueDescription" class="required"/> </td>
 	</tr>
 	
 	<tr>
@@ -45,4 +45,7 @@
 		</td>
 	</tr>
 </table> 
+<script>
+	$('form').validate();
+</script>
 <form:input cssStyle="display:none;" path="creatorPersonEmail" value="${sessionScope['current.person'].email}"/>

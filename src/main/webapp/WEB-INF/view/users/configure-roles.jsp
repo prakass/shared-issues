@@ -1,19 +1,26 @@
 <%@include file="../common/header.jsp"%>
-<h2>Select user and configure roles</h2>
-<h2>Users</h2>
+<div class="content-box">
+<div class="content-header">
+	<span>Select user and configure roles</span>
+</div>
+<div class="content-content">
+<p class="header-font2">Select user</p>
 <form action="configure-roles" method="post">
 <select name="email">
 	<c:forEach var="person" items="${persons}">
 		<option value="${person.email}">${person.email}</option>
 	</c:forEach>
 </select>
-<h2>Current rolesRoles</h2>
+<p class="header-font2">Select roles to configure</p>
 <select name="roles" multiple="multiple">
 		<option value="SUPERADMIN">Superadmin</option>
 		<option value="ADMIN">Admin</option>
 		<option value="USER">User</option>
 </select>
+<div class="clear"></div>
 <br/>
-<input type="submit" value="submit" class="button"/>
+<button type="submit" class="button">SUBMIT</button>
 </form>
+</div>
+</div>
 <%@include file="../common/footer.jsp"%>

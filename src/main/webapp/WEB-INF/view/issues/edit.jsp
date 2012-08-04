@@ -1,12 +1,12 @@
 <%@include file="../common/header.jsp" %>
 <div class="content-box">
 	<div class="content-header">
-		<h2>Edit this issue</h2>
+		<span>Edit this issue</span>
 	</div>
 	<div class="content-content">
 		<form:form commandName="issue" method="post">
 			<%@include file="issue-form.jsp" %>
-		<input type="submit" value="Save changes" class="button"/>
+		<button type="submit"  class="button">SUBMIT</button>
 </form:form>
 </div>
 </div>

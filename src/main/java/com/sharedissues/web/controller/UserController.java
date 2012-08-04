@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sharedissues.all.common.MyService;
+import com.sharedissues.all.common.PasswordEncoder;
 import com.sharedissues.all.common.WebUtility;
 import com.sharedissues.entities.Person;
 
@@ -34,6 +35,7 @@ public class UserController extends MyService{
 	@RequestMapping(value="add-user",method=RequestMethod.POST)
 	public ModelAndView doPostAddUser(Person person,HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("/users/add-user");
+		person.setPassword(PasswordEncoder.encode(person.getEmail(), request.getParameter("password1")));
 		try{
 			getCommonService().persist(person);
 			webUtility.addServerSuccessMessage(request, "New user added successfully");
@@ -81,9 +83,10 @@ public class UserController extends MyService{
 	public String doPostEditUser(HttpServletRequest request,Person person,HttpServletResponse response) throws IOException{
 		String[] roles = request.getParameterValues("roles");
 		person.setRoles("");
-		for(String role:roles){
-			System.out.println(role);
-			person.addRole(role);
+		if(roles!=null){
+			for(String role:roles){
+				person.addRole(role);
+			}
 		}
 		try{
 			getCommonService().update(person);
@@ -91,7 +94,6 @@ public class UserController extends MyService{
 		}catch(Exception e){
 			webUtility.addServerError(request, e.getMessage());
 		}
-		request.getSession().setAttribute("current.person", person);
 		response.sendRedirect(request.getRequestURI()+"?email="+person.getEmail());
 		return null;
 	}
