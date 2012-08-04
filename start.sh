@@ -1,17 +1,14 @@
 #!/bin/bash
-APP_FOLDER=/opt/trunk/
-PROPERTIES_FOLDER=/opt/properties
-CLASSPATH=$PROPERTIES_FOLDER:$APP_FOLDER/target/shared-issues-1/WEB-INF/lib/*:$APP_FOLDER/target/shared-isssues-1/WEB-INF/classes/:.
-
-echo "Stopping application..."
+#First kill all java process
 killall java
 
-echo "Cleaning the application directory"
-mvn clean
+JAVA=$JAVA_HOME/bin/java
+APP_FOLDER=/opt/app/shared-issues
+PROPERTIES_FOLDER=/opt/properties
 
-mvn package
-#echo "Packaging the software"
+CLASSPATH=$PROPERTIES_FOLDER:$APP_FOLDER/target/shared-issues-1/WEB-INF/lib/*:$APP_FOLDER/target/shared-issues-1/WEB-INF/classes:
 
 echo "Starting application..."
 export CLASSPATH=$CLASSPATH
-java -Dfile.encoding=UTF-8 com.sharedissues.all.common.JettyServer prod 80 > app-sysout.log
+$JAVA -Dfile.encoding=UTF-8 com.sharedissues.all.common.JettyServer prod 80 > app-sysout.log
+
