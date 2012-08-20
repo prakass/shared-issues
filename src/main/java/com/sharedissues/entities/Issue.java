@@ -1,5 +1,7 @@
 package com.sharedissues.entities;
 
+import java.util.Date;
+
 import javax.persistence.*;
 
 import com.sharedissues.all.common.Common;
@@ -18,7 +20,12 @@ public class Issue {
 	@Lob
 	String issueDescription;
 	
-	//Status many contain only 3 values (new,viewed,in-progress,resolved)
+	@Column(name="issue_stragety")
+	@Lob
+	String strategy;
+
+	//Status many contain only 5 values (new,viewed,in-progress,resolved,closed)
+	
 	@Column(name="issue_status")
 	String status;
 	
@@ -32,10 +39,29 @@ public class Issue {
 	
 	String category;
 	
-	public Issue(){this.issueUuid=Common.getUuid();}
+	public Issue(){this.issueUuid=Common.getUuid();this.status="new";}
 	
+	@Temporal(TemporalType.DATE)
+	Date deadline;
 	
+	@Temporal(TemporalType.TIMESTAMP)
+	Date createDate = new Date();
 	
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+	public Date getDeadline() {
+		return deadline;
+	}
+
+	public void setDeadline(Date deadline) {
+		this.deadline = deadline;
+	}
 
 	public String getIssueUuid() {
 		return issueUuid;
@@ -99,6 +125,15 @@ public class Issue {
 
 	public void setCategory(String category) {
 		this.category = category;
+	}
+	
+
+	public String getStrategy() {
+		return strategy;
+	}
+
+	public void setStrategy(String strategy) {
+		this.strategy = strategy;
 	}
 	
 	

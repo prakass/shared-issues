@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sharedissues.all.common.MyService;
@@ -39,11 +40,10 @@ public class UserController extends MyService{
 		try{
 			getCommonService().persist(person);
 			webUtility.addServerSuccessMessage(request, "New user added successfully");
-			mav.addObject("person",new Person());
 		}catch(Exception e){
-			webUtility.addServerError(request, "Could not add user! Please check your email it should be unique.");
-			mav.addObject("person",person);
+			webUtility.addServerError(request, "We cannot add this user, someone has already used this email. Please try with different email address!");
 		}
+		mav.addObject("person",new Person());
 		return mav;
 	}
 	
@@ -72,15 +72,29 @@ public class UserController extends MyService{
 	}
 	
 	@RequestMapping(value="edit-user",method=RequestMethod.GET)
-	public ModelAndView doGetEditUser(HttpServletRequest request){
+	public ModelAndView doGetEditUser(HttpServletRequest request,HttpServletResponse response) throws IOException{
 		String email = request.getParameter("email");
 		Person p =new Person();
-		ModelAndView mav = new ModelAndView("/users/edit-user","person",getCommonService().getObject(p, email));
+		Person person = (Person)getCommonService().getObject(new Person(), email);
+		
+		if(person.getEmail().equalsIgnoreCase("superadmin")){
+			webUtility.addServerError(request, "No one can edit superadmin!");
+			response.sendRedirect("/action/users/all-users");
+			return null;
+		}
+		
+		ModelAndView mav = new ModelAndView("/users/edit-user","person",person);
 		return mav;
 	}
 	
 	@RequestMapping(value="edit-user",method=RequestMethod.POST)
 	public String doPostEditUser(HttpServletRequest request,Person person,HttpServletResponse response) throws IOException{
+		if(person.getEmail().equalsIgnoreCase("superadmin")){
+			webUtility.addServerError(request, "No one can edit superadmin!");
+			response.sendRedirect("/action/users/all-users");
+			return null;
+		}
+		
 		String[] roles = request.getParameterValues("roles");
 		person.setRoles("");
 		if(roles!=null){
@@ -88,13 +102,15 @@ public class UserController extends MyService{
 				person.addRole(role);
 			}
 		}
+		
 		try{
 			getCommonService().update(person);
 			webUtility.addServerSuccessMessage(request, "Changes saved");
 		}catch(Exception e){
 			webUtility.addServerError(request, e.getMessage());
 		}
-		response.sendRedirect(request.getRequestURI()+"?email="+person.getEmail());
+		
+		response.sendRedirect("/action/users/all-users");
 		return null;
 	}
 	@RequestMapping(value="remove-user",method=RequestMethod.GET)
@@ -114,6 +130,14 @@ public class UserController extends MyService{
 		response.sendRedirect("/action/users/all-users");
 		return null;
 	}
+	@RequestMapping(value="get-roles",method=RequestMethod.GET)
+	@ResponseBody
+	public String doGetGetRoles(HttpServletRequest request){
+		String  email = request.getParameter("email");
+		Person person = (Person)getCommonService().getObject(new Person(), email);
+		return person.getRoles();
+	}
+	
 	
 	@RequestMapping(value="configure-roles",method=RequestMethod.GET)
 	public ModelAndView doGetConfigureRole(HttpServletRequest request,HttpServletResponse response) {
@@ -129,12 +153,21 @@ public class UserController extends MyService{
 		Person p =new Person();
 		String email = request.getParameter("email");
 		Person person = (Person)getCommonService().getObject(p, email);
+		
+		//Show error message if someone tries to configure superadmin roles
+		if(person.getEmail().equalsIgnoreCase("superadmin")){
+			webUtility.addServerError(request, "No one can configure superadmin roles");
+			response.sendRedirect(request.getRequestURI());
+			return null;
+		}
+		
 		String[] roles = request.getParameterValues("roles");
-		person.setRoles("");
+		person.setRoles(null);
 		for(String role:roles){
 			person.addRole(role);
 		}
 		getCommonService().update(person);
+		webUtility.addServerSuccessMessage(request, "Roles configured successfully");
 		response.sendRedirect(request.getRequestURI());
 		return null;
 	}

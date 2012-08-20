@@ -8,6 +8,10 @@
 		<td>Description<br/>
 		<form:textarea path="issueDescription" class="required"/> </td>
 	</tr>
+	<tr>
+		<td><div class="clear2"></div>Strategies and procedures<br/>
+		<form:textarea path="strategy"/> </td>
+	</tr>
 	
 	<tr>
 		<td>Assign to
@@ -44,8 +48,16 @@
 			</form:select>
 		</td>
 	</tr>
+	<tr>
+		<td>Set deadline <span style="color:#F7BD1C;"> (Format:mm/dd/yyyy)</span>
+	    <form:input path="deadline" class="required date"/> </td>
+	</tr>
 </table> 
+<form:input cssStyle="display:none;" path="creatorPersonEmail" value="${issue.creatorPersonEmail}"/>
+<form:input cssStyle="display:none;" path="status" value="${issue.status}"/>
 <script>
-	$('form').validate();
+var date = $('#issue input#deadline').val();
+if(date!=null){
+ $('#issue input#deadline').val('<fmt:formatDate pattern="M/dd/yy" value="${issue.deadline}"/>');
+}
 </script>
-<form:input cssStyle="display:none;" path="creatorPersonEmail" value="${sessionScope['current.person'].email}"/>

@@ -5,15 +5,17 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@taglib tagdir="/WEB-INF/tags/common"  prefix="si"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
-<%@taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <c:set var="personProfile" value="${sessionScope['current.person']}"/>
+<c:set var="tab" value="${sessionScope['tab']}"/>
 <!DOCTYPE html>
 <!-- Template by freewebsitetemplates.com -->
 <html>
 <head>
-<%@include file="/helper/style-script.jsp" %>
+<%@include file="/helper/styles.jsp" %>
 <meta charset="utf-8" />
-<title>Shared issues</title>
+<title>Shared tasks</title>
+<link rel="SHORTCUT ICON" href="/resources/images/logo1.png" type="image/x-icon" />
 </head>
 <body>
 	<div id="user-account-top" class="menu-container" >
@@ -23,7 +25,7 @@
 		</c:if>
 		<c:if test="${sessionScope['current.person']!=null}">
 					<p>Welcome!<a href="/action/profile" id="profile-link"> ${personProfile.userSalutation} ${personProfile.firstName} ${personProfile.lastName}</a></p>
-					<a id="logout" href="/logout">Logout</a>
+					<a class="logout" href="/logout">Logout</a>
 		</c:if>
 	</ul>
 	</div>
@@ -31,17 +33,33 @@
 			<div id="logo">
 				<a href="/"><img src="/resources/images/logo1.png" alt="" /></a>		
 			</div>
-			<security:authorize access="hasRole('USER') or hasRole('ADMIN') or hasRole('SUPERADMIN')">	
+				<sec:authorize access="hasRole('USER') or hasRole('ADMIN') or hasRole('SUPERADMIN')">	
 			<ul class="menu-items">
-				<security:authorize access="hasRole('ADMIN') or hasRole('SUPERADMIN')">
-					<li class="selected"><a href="/action/users/all-users"><span>USERS</span></a></li>
-				</security:authorize>
-				<li><a href="/action/issues/index"><span>ISSUES</span></a></li>
-				<li><a href="/action/profile"><span>MY PROFILE</span></a></li>
-				<security:authorize access="hasRole('ADMIN') or hasRole('SUPERADMIN')">
-					<li><a href="/action/image/all-images"><span>FILES</span></a></li>
-				</security:authorize>
-				<li><a href="/action/contact"><span>CONTACT ADMIN</span></a></li>	
+				<li <c:if test="${tab eq 'issues'}">class="selected"</c:if>><a href="/action/issues/index"><span>Dashboard</span></a></li>
+				<sec:authorize access="hasRole('ADMIN') or hasRole('SUPERADMIN')">
+					<li <c:if test="${tab eq 'users'}">class="selected"</c:if>><a href="/action/users/all-users"><span>USERS</span></a></li>
+				</sec:authorize>
+				<li <c:if test="${tab eq 'profile'}">class="selected"</c:if>><a href="/action/profile"><span>MY PROFILE</span></a></li>
+				<sec:authorize access="hasRole('ADMIN') or hasRole('SUPERADMIN')">
+					<li <c:if test="${tab eq 'files'}">class="selected"</c:if>><a href="/action/image/all-images"><span>IMAGES</span></a></li>
+				</sec:authorize>
+				<li <c:if test="${tab eq 'contact'}">class="selected"</c:if>><a href="/action/contact"><span>CONTACT</span></a></li>	
 			</ul>
-			</security:authorize>	
+			</sec:authorize>	
 	</div>
+	<div id="submenu-container">
+		<si:showSuccessMessage/>
+		<si:showServerError/>
+		<c:if test="${tab eq 'users'}">
+			<a class="logout" href="/action/users/add-user">Add new account</a>
+			 <span class="logout">|</span>
+			 <a class="logout" href="/action/users/configure-roles">Configure roles</a> 
+		</c:if>
+		<c:if test="${tab eq 'issues'}">
+			<a class="logout" href="/action/issues/create">Create new task</a>
+		</c:if>
+		<c:if test="${tab eq 'profile'}">
+			<a href="/action/edit-profile" class="logout">Edit my profile </a><span class="logout">|</span>
+			<a href="/action/change-password" class="logout"> Change my password</a>
+		</c:if>
+	</diV>

@@ -1,15 +1,4 @@
 <%@include file="../common/header.jsp"%>
-<style>
- #user-profile-detail tr td:nth-child(odd){
- 	font-weight:bold;
- 	padding-right:30px;
- }
- #user-profile-detail tr td:nth-child(even){
- 	font-weight:lighter;
- 	color:#007ACC;
- 	font-size:15px;
- }
-</style>
 <c:set var="person" value="${sessionScope['current.person']}"/>
 <div class="content-box">
 	<div class="content-header">
@@ -27,12 +16,8 @@
 				</c:if>	
 			</td>
 			<td class="content-font" style="padding-left:50px;">
-				<si:showSuccessMessage/>
-				<a href="/action/edit-profile" id="logout">Edit my profile </a><span>|</span>
-				<a href="/action/change-password" id="logout"> Change my password</a>
-				<div class="clear2"></div>
 				<form>
-				<table id="user-profile-detail">
+				<table class="detail-table">
 				<tr><td>Your name</td><td>${person.userSalutation} ${person.firstName} ${person.lastName}</td></tr>
 				<tr><td>Email</td><td>${person.email}</td></tr>
 				<tr><td>Address</td><td>${person.address}</td></tr>

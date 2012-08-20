@@ -1,11 +1,11 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<table>
+<table id="user-list">
 	<thead>
 		<tr>
-			<td>Full name</td>
-			<td>Email</td>
-			<td>Address</td>
-			<td>Actions</td>
+			<th>Full name</th>
+			<th>Email</th>
+			<th>Address</th>
+			<th>Actions</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -15,8 +15,8 @@
 			<td>${person.email}</td>
 			<td>${person.city}</td>
 			<td>
-				<a href="/action/users/edit-user?email=${person.email}"><button>Edit this user</button></a>
-				<a href="/action/users/remove-user?email=${person.email}"><button>Remove this user</button></a>
+				<a href="/action/users/edit-user?email=${person.email}"><img src="/resources/images/icons/edit-3.jpg" class="action-icon" title="Edit this user"/> </a>
+				<a href="/action/users/remove-user?email=${person.email}"><img src="/resources/images/icons/delete-4.png" class="action-icon" title="Remove this user"/></a>
 			</td>
 		</tr>
 		</c:forEach>

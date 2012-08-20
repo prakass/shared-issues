@@ -7,13 +7,13 @@
 </style>
 <div class="content-box">
 <div class="content-header">
-	<h2>All issues</h2>
+	<b>All issues</b>
 </div>
 <div class="content-content">
 	<c:forEach var="issue" items="${issues}">
 		<c:if test="${issue.assignedPersonEmail==sessionScope['current.person'].email && sessionScope['current.person'].email !='superadmin'}">
 			<div class="issue-board-item">
-				<h2>${issue.issueTitle}</h2><br/>
+				<b>${issue.issueTitle}</b>
 				${issue.issueDescription}
 			</div>
 		</c:if>

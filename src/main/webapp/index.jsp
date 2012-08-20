@@ -1,7 +1,7 @@
 <%@include file="WEB-INF/view/common/header.jsp"%>
 <div class="content-box">
 	<div class="content-header">
-		<span>Welcome</span>
+		<b>Welcome</b>
 	</div>
 	<div class="content-content">
 		<p class="content-font">

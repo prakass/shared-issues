@@ -16,6 +16,7 @@ a{
 
 table{
 	width:auto;
+	
 	border-collapse:collapse;
 }
 
@@ -31,8 +32,8 @@ form input{
 }
 
 form textarea{
-	width:400px;
-	height:100px;
+	width:450px;
+	height:120px;
 	display:block;
 }
 
@@ -160,7 +161,39 @@ border:1px solid red;
 .clear4{
 	height:25px;
 }
+.action-icon{
+	width:30px;height:30px;
+}
 
+.success-message{
+	font-size: small;
+	font-weight:bold;
+	color:#60BBFF;
+	display: block;
+	border:1px solid #00AFF0;
+	padding:6px;
+}
+
+.error-message{
+	font-size: small;
+	font-weight:bold;
+	color:red;
+	display: block;
+	border:1px solid #FCE758;
+	padding:6px;	
+}
+
+.body-fit{
+	width:960px;margin:auto;
+}
+table.top-flow tr td,table.top-flow tr th{
+	vertical-align:top;
+}
+.person-link{
+	color:#0182C5;
+	font-weight:lighter;
+	font-size:small;
+}
 
 /*Styles related to issues*/
 .issue-board-item{
@@ -171,6 +204,63 @@ border:1px solid red;
 	display: inline;
 }
 
+.single-comment{
+	background-color: #F5F5F5;
+	width:75%;
+	padding:10px;
+}
+
+.issues-list tr{
+	border-bottom:1px solid #F5F5F5; border-top:1px solid #F5F5F5;"
+}
+
+table.issues-list tr td{
+	padding-right:12px;
+	font-size:small;
+}
+
+table.issues-list tr td a{
+	color:#2A5FA1;
+	font-weight:normal;
+}
+table.issues-list tr td a:HOVER{
+	color:#2E86DF;
+	font-weight:lighter;
+}
+
+.issue-action-bar{
+	padding:10px;
+	border:1px solid #F8F8F8;
+	border-radius:5px;
+}
+
+	.detail-table tr td:nth-child(odd){
+ 	font-weight:bold;
+ 	padding-right:30px;
+ 	width:20%;
+ }
+ .detail-table tr td:nth-child(even){
+ 	font-weight:lighter;
+ 	color:#007ACC;
+ 	font-size:15px;
+ 	width:80%;
+ }
+.activity-item span{
+	font-weight:lighter;
+	color:#666666;
+	font-size:small;
+}
+.activity-item label{
+	font-weight:bold;font-size:small;
+}
+#remove-activity{
+	font-size:10px;
+	font-weight:bold;
+	color:#E4E4E4;
+}
+#remove-activity:HOVER{
+	color:gray;
+}
 
 /*User login and logout*/
 #user-account-top{
@@ -180,14 +270,14 @@ border:1px solid red;
 		text-align:right;
 		
 	}
-	#logout{
+	.logout{
 		font-size:12px;
 		font-weight:bold;
 		text-decoration:none;
 		color:#818A8C;
 	}
 	
-	#logout:HOVER{
+	.logout:HOVER{
 		text-decoration: underline;
 	}
 	#user-account-top p{
@@ -200,3 +290,27 @@ border:1px solid red;
 	#login-logout{
 		float:right!important;
 	}
+	
+	
+/*User list*/
+table#user-list tr td,table#user-list tr th{
+	text-align:left;
+	padding-right:10px;
+}
+table#user-list{
+	width:70%;
+}
+
+table#user-list tr{
+	border-bottom:2px solid #BBBBBB;
+}
+
+
+/*Sub menu styles*/
+#submenu-container{
+	width:960px;margin:auto;
+	margin-top:0px;margin-bottom:10px;
+	font-size:20px;
+}
+
+/*Issue*/

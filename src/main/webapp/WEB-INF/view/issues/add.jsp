@@ -6,7 +6,8 @@
 	<div class="content-content">
 		<form:form commandName="issue" method="post">
 			<%@include file="issue-form.jsp" %>
-		<button type="submit" class="button">SUBMIT</button>
+			<div class="clear2"></div>
+			<button type="submit" class="button">Create</button>
 </form:form>
 </div>
 </div>

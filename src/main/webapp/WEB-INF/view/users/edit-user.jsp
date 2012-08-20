@@ -19,8 +19,6 @@
 		</c:forEach>
 		<form:option value=""></form:option>
 	</form:select>
-	<si:showServerError/>
-	<si:showSuccessMessage/>
 	<%@include file="user-form.jsp"%>
 </form:form>
 </div>

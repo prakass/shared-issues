@@ -6,8 +6,6 @@
 </div>
 <div class="content-content">
 	<form:form method="post" action="add-user" commandName="person">
-	<si:showServerError/>
-	<si:showSuccessMessage/>
 	<%@include file="user-form.jsp"%>
 </form:form>
 </div>

@@ -2,10 +2,10 @@
 <%@attribute name="message"%>
 <c:if test="${sessionScope['success-message']!=null}">
 	<c:if test="${message!=null}">
-		<p style="color:red;">${message}</p>
+		<span class="success-message">${message}</span>
 	</c:if>
 	<c:if test="${message==null}">
-		<p style="color:blue;">${sessionScope['success-message']}</p>
+		<span class="success-message">${sessionScope['success-message']}</span>
 	</c:if>
 </c:if>
 <% request.getSession().removeAttribute("success-message"); %>

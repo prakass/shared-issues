@@ -3,6 +3,8 @@ package com.sharedissues.all.common;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.management.RuntimeErrorException;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,7 @@ public class Queryable
 			s.getTransaction().commit();
 		}catch(Exception e){
 			s.getTransaction().rollback();
+			throw new RuntimeException(e.getMessage());
 		}finally{
 			s.close();
 		}

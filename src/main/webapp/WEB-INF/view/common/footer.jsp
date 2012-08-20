@@ -12,9 +12,9 @@
 		}
 	%>
 	<div class="content-box">
-	<security:authorize access="hasRole('SUPERADMIN')">	
+	<sec:authorize access="hasRole('SUPERADMIN')">	
 		<span class="header-font2">Current total number of visits: <%=request.getServletContext().getAttribute("visits")%></span>
-	</security:authorize>
+	</sec:authorize>
 	</div>
 
 <div id="footer">
@@ -32,5 +32,6 @@
 			</div>	
 		</div>
 	</div>
+<%@include file="/helper/scripts.jsp" %>
 </body>
 </html>

@@ -50,6 +50,7 @@ public class CommonController extends ServiceSupport{
 	@RequestMapping(value="contact",method=RequestMethod.POST)
 	public void doPostContact(HttpServletRequest request,HttpServletResponse response) throws IOException
 	{
+		webUtility.addServerSuccessMessage(request, "We have received your message. We will try to process it soon.");
 		response.sendRedirect(request.getParameter("target"));
 	}
 	@RequestMapping(value="change-password",method=RequestMethod.GET)
@@ -63,11 +64,16 @@ public class CommonController extends ServiceSupport{
 	@RequestMapping(value="change-password",method=RequestMethod.POST)
 	public void doPostChangePassword(HttpServletRequest request,HttpServletResponse response) throws IOException
 	{
-		Person person = (Person)request.getSession().getAttribute("current.person");
-		String password = request.getParameter("password");
-		person.setPassword(PasswordEncoder.encode(person.getEmail(), password));
-		getCommonService().update(person);
-		request.getSession().setAttribute("current.person",person);
+		try{
+			Person person = (Person)request.getSession().getAttribute("current.person");
+			String password = request.getParameter("password");
+			person.setPassword(PasswordEncoder.encode(person.getEmail(), password));
+			getCommonService().update(person);
+			request.getSession().setAttribute("current.person",person);
+			webUtility.addServerSuccessMessage(request, "Your password is changed");
+		}catch(Exception e) {
+			webUtility.addServerError(request, e.getMessage());
+		}
 		response.sendRedirect("/action/profile");
 	}
 	
@@ -98,6 +104,14 @@ public class CommonController extends ServiceSupport{
 		response.sendRedirect("/action/profile");
 		return null;
 	}
+	
+	@RequestMapping(value="remove-activity",method=RequestMethod.GET)
+	public void doGetRemoveActivity(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String activityId = request.getParameter("activityId");
+		getCommonService().remove("activity", "activityId", activityId);
+		response.sendRedirect("/action/issues/index");
+	}
+	
 	
 	
 }

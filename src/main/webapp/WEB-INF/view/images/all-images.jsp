@@ -6,11 +6,9 @@
 </div>
 <div class="content-content">
 <c:forEach var="image" items="${images}">
-	<div style="border:1px solid #F5F5F5;margin:20px;display:inline-table;text-align:center;">
-	 	<img src="/action/image/get/${image.imageUuid}" style="width:150px;height:150px;"/></td>
-	    <div style="border-top:1px solid #F5F5F5;">
-	    	 <a href="/action/image/remove?imageUuid=${image.imageUuid}&target=/action/image/all-images"><button>Remove</button></a>
-	    </div>
+	<div style="padding:5px; border:1px solid #F5F5F5;margin:20px;display:inline-table;text-align:center;">
+	    <a style="float:right;" href="/action/image/remove?imageUuid=${image.imageUuid}&target=/action/image/all-images"><img src="/resources/images/icons/delete-4.png" class="action-icon" title="Remove this image"/> </a>
+	 	<a href="/action/image/get/${image.imageUuid}"><img src="/action/image/get/${image.imageUuid}" style="width:150px;height:150px;"/></a></td>
  	</div>
  </c:forEach> 	
 </div>

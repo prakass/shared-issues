@@ -85,7 +85,11 @@ public class Person implements Serializable{
 		return roleList;
 	}
 	public void addRole(String rle){
-		roles = roles+rle+":";
+		if(roles==null){
+			roles = rle;
+		}else{
+			roles += ":"+rle;
+		}
 		
 	}
 	

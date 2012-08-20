@@ -11,15 +11,17 @@
      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
 	http://www.springframework.org/schema/aop
 	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+	
+	<context:property-placeholder location="classpath:shared-issues.properties"/>
 
 	<bean name="c3datasource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-		<property name="jdbcUrl" value="jdbc:mysql://localhost/orientation" />
-		<property name="user" value="root" />
-		<property name="password" value="nepal1234" />
+		<property name="jdbcUrl" value="jdbc:mysql://${db.host}/${db.db}" />
+		<property name="user" value="${db.username}" />
+		<property name="password" value="${db.password}" />
 		<property name="driverClass" value="com.mysql.jdbc.Driver" />
 		<property name="initialPoolSize" value="5" />
 	</bean>
-
+	
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
 		scope="singleton">
